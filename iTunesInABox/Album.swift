@@ -14,11 +14,11 @@ import Foundation
 // MARK: - AlbumResult
 struct AlbumResult: Codable {
     let resultCount: Int
-    let results: [Album]
+    let results: [AlbumJSON]
 }
 
 // MARK: - Result
-struct Album: Codable {
+struct AlbumJSON: Codable {
     enum CollectionExplicitness: String, Codable {
         case explicit = "explicit"
         case notExplicit = "notExplicit"
@@ -73,5 +73,10 @@ struct Album: Codable {
         case collectionViewURL = "collectionViewUrl"
         case artworkUrl60, artworkUrl100, collectionPrice, collectionExplicitness, trackCount, copyright, country, currency, releaseDate, primaryGenreName, contentAdvisoryRating
     }
+}
+
+struct Album {
+    let artistName: String
+    let collectionName: String
 }
 

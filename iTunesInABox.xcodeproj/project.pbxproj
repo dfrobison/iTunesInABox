@@ -6,11 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		9178189A2CAE066F00D48245 /* SwiftNavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 917818992CAE066F00D48245 /* SwiftNavigation */; };
-		9178189C2CAE066F00D48245 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = 9178189B2CAE066F00D48245 /* SwiftUINavigation */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		3DD3C5CF2CADDA20005AFDA5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -57,8 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9178189C2CAE066F00D48245 /* SwiftUINavigation in Frameworks */,
-				9178189A2CAE066F00D48245 /* SwiftNavigation in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,8 +112,6 @@
 			);
 			name = iTunesInABox;
 			packageProductDependencies = (
-				917818992CAE066F00D48245 /* SwiftNavigation */,
-				9178189B2CAE066F00D48245 /* SwiftUINavigation */,
 			);
 			productName = iTunesInABox;
 			productReference = 3DD3C5BE2CADDA1F005AFDA5 /* iTunesInABox.app */;
@@ -205,8 +196,6 @@
 			mainGroup = 3DD3C5B52CADDA1F005AFDA5;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				917818942CADFCE900D48245 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
-				917818982CAE066F00D48245 /* XCRemoteSwiftPackageReference "swift-navigation" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3DD3C5BF2CADDA1F005AFDA5 /* Products */;
@@ -579,38 +568,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		917818942CADFCE900D48245 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.15.0;
-			};
-		};
-		917818982CAE066F00D48245 /* XCRemoteSwiftPackageReference "swift-navigation" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-navigation.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.2.1;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		917818992CAE066F00D48245 /* SwiftNavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 917818982CAE066F00D48245 /* XCRemoteSwiftPackageReference "swift-navigation" */;
-			productName = SwiftNavigation;
-		};
-		9178189B2CAE066F00D48245 /* SwiftUINavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 917818982CAE066F00D48245 /* XCRemoteSwiftPackageReference "swift-navigation" */;
-			productName = SwiftUINavigation;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3DD3C5B62CADDA1F005AFDA5 /* Project object */;
 }
