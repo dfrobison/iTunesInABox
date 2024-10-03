@@ -7,6 +7,8 @@
 
 
 import Foundation
+
+
 // https://itunes.apple.com/search?term=jack+johnson&entity=album&limit=5
 
 // MARK: - AlbumResult

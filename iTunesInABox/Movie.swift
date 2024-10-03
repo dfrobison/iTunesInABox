@@ -7,6 +7,7 @@
 
 
 import Foundation
+import SwiftUINavigation
 
 // https://itunes.apple.com/search?term=jack+johnson&entity=movie&limit=5
 
