@@ -7,20 +7,30 @@
 
 import Foundation
 import IdentifiedCollections
-
+import Dependencies
 
 class AlbumRepository: Repository {
-    static let url: URL = .init(string: "https://itunes.apple.com/search?term=jack+johnson&entity=album&limit=5")!
-    
     typealias T = Album
     
-    func get() async throws -> IdentifiedArrayOf<T> {
-        let (data, _) = try await URLSession.shared.data(from: AlbumRepository.url)
-        let albumResult = try JSONDecoder().decode(AlbumResult.self, from: data)
+    @Dependency(\.uuid) var uuid
+    
+    func get(searchTerm: String, limit: Int = 20) async throws -> IdentifiedArrayOf<T> {
+        guard let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&entity=album&limit=\(limit)") else {
+            return .init(uniqueElements: [])
+        }
+                
+        let (data, _) = try await URLSession.shared.data(from: url)
+        var ar: AlbumResult = .init(resultCount: 0, results: [])
+        do {
+            let albumResult = try JSONDecoder().decode(AlbumResult.self, from: data)
+            ar = albumResult
+        } catch {
+            print("Error decoding album result: \(error)")
+        }
         return IdentifiedArrayOf<T>(
-            uniqueElements: albumResult.results.map {
+            uniqueElements: ar.results.map {
             Album(
-                id: UUID(),
+                id: self.uuid(),
                 artistName: $0.artistName,
                 collectionName: $0.collectionName
             )

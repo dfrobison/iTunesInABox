@@ -23,15 +23,15 @@ struct AlbumJSON: Codable {
     let collectionType: String
     let artistID: Int
     let collectionID: Int
-    let amgArtistID: Int
+    let amgArtistID: Int?
     let artistName: String
     let collectionName: String
     let collectionCensoredName: String
-    let artistViewURL: String
+    let artistViewURL: String?
     let collectionViewURL: String
     let artworkUrl60: String
     let artworkUrl100: String
-    let collectionPrice: Double
+    let collectionPrice: Double?
     let collectionExplicitness: String
     let trackCount: Int
     let copyright: String

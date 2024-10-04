@@ -14,34 +14,47 @@ struct iTunesInABoxAppFeature {
     @ObservableState
     struct State: Equatable {
         var albums: IdentifiedArrayOf<Album> = []
+        var albumSearchTerm: String = ""
     }
     
-    enum Action {
-        case loadData
+    enum Action: BindableAction {
+        case binding(BindingAction<State>)
         case albumsResponse(Result<IdentifiedArrayOf<Album>, any Error>)
     }
     
+    @Dependency(\.mainQueue) var mainQueue
+    
     var body: some ReducerOf<Self> {
-        
-        Reduce { state, action in
+        BindingReducer()
+        Reduce {
+            state,
+            action in
             switch action {
-                case .loadData:
-                    return .run { send in
-                        await send(.albumsResponse(Result {
-                            try await AlbumRepository().get()
-                        }))
-                        
-                    }
-                    
-                case .albumsResponse(let result):
-                    
-                    if case .success(let albums) = result {
-                        state.albums = albums
-                        
-                    }
-                    
-                    return .none
+            case let .albumsResponse(.success(albums)):
+                state.albums = albums
+                return .none
+                
+            case .albumsResponse(.failure):
+                return .none
+                
+            case .binding(\.albumSearchTerm):
+                enum CancelID { case search }
+                
+                return .run {[searchTerm = state.albumSearchTerm] send in
+                    await send(
+                        .albumsResponse(
+                            Result {
+                                try await AlbumRepository().get(
+                                    searchTerm: searchTerm
+                                )
+                            })
+                    )
+                }
+                .debounce(id: CancelID.search, for: 0.5, scheduler: self.mainQueue)
+            case .binding(_):
+                return .none
             }
+            
         }
     }
 }

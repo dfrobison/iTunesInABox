@@ -10,5 +10,5 @@ import IdentifiedCollections
 protocol Repository {
     associatedtype T: Identifiable
     
-    func get() async throws -> IdentifiedArrayOf<T>
+    func get(searchTerm: String, limit: Int) async throws -> IdentifiedArrayOf<T>
 }
