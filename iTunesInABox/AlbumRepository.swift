@@ -6,24 +6,25 @@
 //
 
 import Foundation
-
-
-
+import IdentifiedCollections
 
 
 class AlbumRepository: Repository {
-    static let url: URL = .init(string: "https://itunes.apple.com/search?term=album&media=music&limit=50")!
+    static let url: URL = .init(string: "https://itunes.apple.com/search?term=jack+johnson&entity=album&limit=5")!
     
     typealias T = Album
     
-    func get() async throws -> [T] {
+    func get() async throws -> IdentifiedArrayOf<T> {
         let (data, _) = try await URLSession.shared.data(from: AlbumRepository.url)
         let albumResult = try JSONDecoder().decode(AlbumResult.self, from: data)
-        return albumResult.results.map {
+        return IdentifiedArrayOf<T>(
+            uniqueElements: albumResult.results.map {
             Album(
+                id: UUID(),
                 artistName: $0.artistName,
                 collectionName: $0.collectionName
             )
         }
+        )
     }
 }

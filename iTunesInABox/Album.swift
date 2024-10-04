@@ -19,33 +19,11 @@ struct AlbumResult: Codable {
 
 // MARK: - Result
 struct AlbumJSON: Codable {
-    enum CollectionExplicitness: String, Codable {
-        case explicit = "explicit"
-        case notExplicit = "notExplicit"
-    }
-    
-    enum CollectionType: String, Codable {
-        case album = "Album"
-    }
-    
-    enum Country: String, Codable {
-        case usa = "USA"
-    }
-    
-    enum Currency: String, Codable {
-        case usd = "USD"
-    }
-    
-    enum WrapperType: String, Codable
-    {
-        case collection = "collection"
-    }
-
-    let wrapperType: WrapperType
-    let collectionType: CollectionType
+    let wrapperType: String
+    let collectionType: String
     let artistID: Int
     let collectionID: Int
-    let amgArtistID: Int?
+    let amgArtistID: Int
     let artistName: String
     let collectionName: String
     let collectionCensoredName: String
@@ -54,14 +32,13 @@ struct AlbumJSON: Codable {
     let artworkUrl60: String
     let artworkUrl100: String
     let collectionPrice: Double
-    let collectionExplicitness: CollectionExplicitness
+    let collectionExplicitness: String
     let trackCount: Int
     let copyright: String
-    let country: Country
-    let currency: Currency
-    let releaseDate: Date
+    let country: String
+    let currency: String
+    let releaseDate: String
     let primaryGenreName: String
-    let contentAdvisoryRating: String?
 
     enum CodingKeys: String, CodingKey {
         case wrapperType, collectionType
@@ -71,11 +48,21 @@ struct AlbumJSON: Codable {
         case artistName, collectionName, collectionCensoredName
         case artistViewURL = "artistViewUrl"
         case collectionViewURL = "collectionViewUrl"
-        case artworkUrl60, artworkUrl100, collectionPrice, collectionExplicitness, trackCount, copyright, country, currency, releaseDate, primaryGenreName, contentAdvisoryRating
+        case artworkUrl60
+        case artworkUrl100
+        case collectionPrice
+        case collectionExplicitness
+        case trackCount
+        case copyright
+        case country
+        case currency
+        case releaseDate
+        case primaryGenreName
     }
 }
 
-struct Album {
+struct Album: Identifiable, Equatable {
+    let id: UUID
     let artistName: String
     let collectionName: String
 }
