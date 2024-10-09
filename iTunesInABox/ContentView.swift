@@ -8,14 +8,10 @@
 import SwiftUI
 import ComposableArchitecture
 
-
-
-
-struct ContentView: View {
+struct AlbumView: View {
     @Bindable var store: StoreOf<iTunesInABoxAppFeature>
     
     var body: some View {
-        NavigationView {
             List {
                 ForEach(store.albums) { album in
                     Text(album.artistName)
@@ -23,9 +19,17 @@ struct ContentView: View {
             }
             .searchable(text: $store.albumSearchTerm, prompt: Text("Search for an album"))
             .navigationTitle("iTunes in a Box")
+    }
+}
+
+
+struct ContentView: View {
+    @Bindable var store: StoreOf<iTunesInABoxAppFeature>
+    
+    var body: some View {
+        NavigationView {
+            AlbumView(store: store)
         }
-        
-        
     }
 }
 

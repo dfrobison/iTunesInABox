@@ -44,9 +44,7 @@ struct iTunesInABoxAppFeature {
                     await send(
                         .albumsResponse(
                             Result {
-                                try await AlbumRepository().get(
-                                    searchTerm: searchTerm
-                                )
+                                try await RespositoryManager(AlbumRepository()).get(searchTerm: searchTerm)
                             })
                     )
                 }
